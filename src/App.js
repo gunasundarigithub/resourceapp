@@ -19,10 +19,10 @@ const useStyles = makeStyles(() => ({
  render(){
 
 const team_list = [
-  { team_name:'team-1', team_id: 1994 },
-  { team_name: 'team-2', team_id: 1972 },
-  { team_name: 'team-3', team_id: 1974 },
-  { team_name: 'team-4', team_id: 2008 },
+  { team_name:'team-1', team_id: 1 },
+  { team_name: 'team-2', team_id: 2 },
+  { team_name: 'team-3', team_id: 3 },
+  { team_name: 'team-4', team_id: 4 },
 ];
 
 
