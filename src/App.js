@@ -24,8 +24,6 @@ const team_list = [
   { team_name: 'team-3', team_id: 3 },
   { team_name: 'team-4', team_id: 4 },
 ];
-
-
 return (
   
     <div className="App">
