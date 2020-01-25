@@ -12,6 +12,8 @@
     "install": "^0.13.0",
     "npm": "^6.13.6",
     "react": "^16.12.0",
+    "react-axios": "^2.0.3",
+    "react-datasheet": "^1.4.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0"
   },

@@ -5,6 +5,7 @@ import SearchAppBar from './SearchAppBar.js'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from '@material-ui/core/Button';
+import Table from './Components/Table';
 
 
 class App extends React.Component{
@@ -15,8 +16,9 @@ class App extends React.Component{
 //     alignItems: 'center',
 //   },
 // }));
- 
- render(){
+
+
+render(){
 
 const team_list = [
   { team_name:'team-1', team_id: 1 },
@@ -24,22 +26,29 @@ const team_list = [
   { team_name: 'team-3', team_id: 3 },
   { team_name: 'team-4', team_id: 4 },
 ];
+
+// const [showTable]=false;
+// const [setShowTable]=false;
+
 return (
-  
-    <div className="App">
+  <div className="App">
       <SearchAppBar/>
-      <br/><br/>
-      <div className='root'>
-      <Autocomplete display="inline"
-      style={{ width: 400}}
+      <br/><br/>  
+      <div style={{ display: 'inline-flex' }}>
+      <div> <Autocomplete display="inline"
+      style={{ width: 350, float :"left"}}
       options={team_list.map(option => option.team_name)}
         renderInput={params => (
           <TextField {...params} label="Enterprise_teams" color="secondary"  variant='outlined' style={{ width: 300}} />
-        )}
-  /> <Button variant="contained" display='inline' color="secondary">
+        )}/> 
+  <Button variant="contained" display='inline' color="secondary"  onClick={alert("hiiiii")}>
   Create/edit/view schedule
 </Button>
-  </div>
+    </div>
+        </div>
+
+ {/* {showTable  ? 
+ <div><Table/></div>:"not showing" }  */}
 </div>
      );
 }
