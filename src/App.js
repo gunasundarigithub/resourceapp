@@ -27,8 +27,8 @@ const team_list = [
   { team_name: 'team-4', team_id: 4 },
 ];
 
-// const [showTable]=false;
-// const [setShowTable]=false;
+const [showTable]=false;
+ const [setShowTable]=!showTable;
 
 return (
   <div className="App">
@@ -41,11 +41,11 @@ return (
         renderInput={params => (
           <TextField {...params} label="Enterprise_teams" color="secondary"  variant='outlined' style={{ width: 300}} />
         )}/> 
-  <Button variant="contained" display='inline' color="secondary"  onClick={() => alert('hiiiii')}>
+  <Button variant="contained" display='inline' color="secondary"  onClick={() =>setShowTable='true'}>
   Create/edit/view schedule
 </Button>
     </div></div>
-   <div><Table /></div>
+   {showTable ? <div><Table></Table></div> : null}
 </div>
      );
 }

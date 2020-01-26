@@ -11,7 +11,21 @@ export default class Table extends React.Component {
           {value: 'B', readOnly: true},
           {value: 'C', readOnly: true},
           {value: 'D', readOnly: true},
-          {value: 'E', readOnly: true}
+          {value: 'E', readOnly: true},
+          {value: 'F', readOnly: true},
+          {value: 'G', readOnly: true},
+          {value: 'H', readOnly: true},
+          {value: 'I', readOnly: true},
+          {value: 'J', readOnly: true},
+          {value: 'K', readOnly: true},
+          {value: 'L', readOnly: true},
+          {value: 'M', readOnly: true},
+          {value: 'N', readOnly: true},
+          {value: 'O', readOnly: true},
+          {value: 'P', readOnly: true},
+          {value: 'Q', readOnly: true},
+          {value: 'R', readOnly: true},
+          {value: 'S', readOnly: true},
         ],
         [{readOnly: true, value: 'Employee-1'}, {value: null}, {value: null},{value: null},{value: null},{value: null}],
         [{readOnly: true, value: 'Employee-2'}, {value: null},{value: null},{value: null},{value: null},{value: null},],
@@ -22,7 +36,7 @@ export default class Table extends React.Component {
   }
   render () {
     return (
-      <Datasheet
+      <Datasheet 
         data={this.state.grid}
         valueRenderer={(cell) => cell.value}
         onContextMenu={(e, cell, i, j) => cell.readOnly ? e.preventDefault() : null}
