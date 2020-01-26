@@ -41,14 +41,11 @@ return (
         renderInput={params => (
           <TextField {...params} label="Enterprise_teams" color="secondary"  variant='outlined' style={{ width: 300}} />
         )}/> 
-  <Button variant="contained" display='inline' color="secondary"  onClick={alert("hiiiii")}>
+  <Button variant="contained" display='inline' color="secondary"  onClick={() => alert('hiiiii')}>
   Create/edit/view schedule
 </Button>
-    </div>
-        </div>
-
- {/* {showTable  ? 
- <div><Table/></div>:"not showing" }  */}
+    </div></div>
+   <div><Table /></div>
 </div>
      );
 }
