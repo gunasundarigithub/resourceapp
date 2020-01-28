@@ -10,12 +10,10 @@ import Table from './Components/Table';
 
 class App extends React.Component{
 
-// const useStyles = makeStyles(() => ({
-//   root: {
-//     marginTop: '5px',
-//     alignItems: 'center',
-//   },
-// }));
+State= {
+  showTable:false
+    }
+
 
 render(){
 
@@ -25,12 +23,7 @@ const team_list = [
   { team_name: 'team-3', team_id: 3 },
   { team_name: 'team-4', team_id: 4 },
 ];
- 
-let  showTable=false
-this.state= {
-    showTable : !showTable
-    
-  }
+
 
  //const [showTable, setShowTable] = useState(false);
 
@@ -45,14 +38,13 @@ return (
         renderInput={params => (
           <TextField {...params} label="Enterprise_teams" color="secondary"  variant='outlined' style={{ width: 300}} />
         )}/> 
-  <Button variant="contained" display='inline' color="secondary"  onClick={() =>console.log(this.state.showTable,'showTable')}>
+  <Button variant="contained" display='inline' color="secondary"   onClick={() => {this.setState({showTable:true})} }>
   Create/edit/view schedule
 </Button>
     </div></div>
-{showTable ? <div><Table></Table></div> : null }
+{this.state.showTable ? <div><Table></Table></div> : null }
 </div>
      );
 }
 }
-
 export default App;
