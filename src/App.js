@@ -10,7 +10,7 @@ import Table from './Components/Table';
 
 class App extends React.Component{
 
-State= {
+state= {
   showTable:false
     }
 
