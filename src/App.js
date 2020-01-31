@@ -11,9 +11,14 @@ import Table from './Components/Table';
 class App extends React.Component{
 
 state= {
-  showTable:false
+  showTable:false,
+  showbutton:false,
+
     }
 
+handleChange = (e) => {
+    this.setState({ renderInput: e.target.value,showbutton: true }, () => console.log("hiiiiiii",this.state));
+  }
 
 render(){
 
@@ -23,6 +28,8 @@ const team_list = [
   { team_name: 'team-3', team_id: 3 },
   { team_name: 'team-4', team_id: 4 },
 ];
+
+
 
 
  //const [showTable, setShowTable] = useState(false);
@@ -35,10 +42,12 @@ return (
       <div> <Autocomplete display="inline"
       style={{ width: 350, float :"left"}}
       options={team_list.map(option => option.team_name)}
+      onChange={this.handleChange}
         renderInput={params => (
-          <TextField {...params} label="Enterprise_teams" color="secondary"  variant='outlined' style={{ width: 300}} />
-        )}/> 
-  <Button variant="contained" display='inline' color="secondary"   onClick={() => {this.setState({showTable:true})} }>
+
+          <TextField {...params} label="Enterprise_teams" color="secondary"  variant='outlined' style={{ width: 300}} />)}/> 
+  <Button variant="contained" display='inline' color="secondary" disabled={!(this.state.value)}
+  onClick={() => {this.setState({showTable:true})} }>
   Create/edit/view schedule
 </Button>
     </div></div>
