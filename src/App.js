@@ -38,16 +38,16 @@ const team_list = [
 return (
   <div className="App">
       <SearchAppBar/> 
-      <div style={{  display: 'inline-flex' }}>
+      <div style={{width:'950px' }}>
       <div>
-      <br></br>
+      <br/>
       <Select title="Enterprise Teams" change={this.handleChange} items={team_list} selectedName={this.state.selectedTeam}   />
-    { this.state.showButton ? <Button variant="contained" display='inline'  color="secondary" onClick={() => {this.setState({showTable:true})} }>
+    { this.state.showButton ? <Button variant="contained" color="secondary"  className="bStyle" onClick={() => {this.setState({showTable:true})} }>
        Create/edit/view schedule
      </Button> :null }
     </div>
     </div>
-{this.state.showTable ? <div><Table></Table></div> : null }
+{this.state.showTable ? <div style={{display: 'inline-flex', justifyContent:'center', alignItems:'center', height: '500px'}}><Table></Table></div> : null }
 </div>
      );
 }

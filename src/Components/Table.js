@@ -2,30 +2,33 @@ import _ from 'lodash';
 import React from 'react';
 import Datasheet from './Datasheet'
 export default class Table extends React.Component {
+
+
+
   constructor (props) {
-    super(props)
-    this.state = {
-      grid: [
+  super(props)
+  this.state = {
+  grid: [
         [
           {readOnly: true, value: 'Resourse_List'},
-          {value: 'B', readOnly: true},
-          {value: 'C', readOnly: true},
-          {value: 'D', readOnly: true},
-          {value: 'E', readOnly: true},
-          {value: 'F', readOnly: true},
-          {value: 'G', readOnly: true},
-          {value: 'H', readOnly: true},
-          {value: 'I', readOnly: true},
-          {value: 'J', readOnly: true},
-          {value: 'K', readOnly: true},
-          {value: 'L', readOnly: true},
-          {value: 'M', readOnly: true},
-          {value: 'N', readOnly: true},
-          {value: 'O', readOnly: true},
-          {value: 'P', readOnly: true},
-          {value: 'Q', readOnly: true},
-          {value: 'R', readOnly: true},
-          {value: 'S', readOnly: true},
+          {value: 'B'},
+          {value: 'C'},
+          {value: 'D'},
+          {value: 'E'},
+          {value: 'F'},
+          {value: 'G'},
+          {value: 'H'},
+          {value: 'I'},
+          {value: 'J'},
+          {value: 'K'},
+          {value: 'L'},
+          {value: 'M'},
+          {value: 'N'},
+          {value: 'O'},
+          {value: 'P'},
+          {value: 'Q'},
+          {value: 'R'},
+          {value: 'S'},
         ],
         [{readOnly: true, value: 'Employee-1'}, {value: null}, {value: null},{value: null},{value: null},{value: null}],
         [{readOnly: true, value: 'Employee-2'}, {value: null},{value: null},{value: null},{value: null},{value: null},],
@@ -33,12 +36,16 @@ export default class Table extends React.Component {
         [{readOnly: true, value: 'Employee-4'}, {value: null},{value: null},{value: null},{value: null},{value: null}]
       ]
     }
+// const contentStyles = { background: 'silver', border: '1px solid black' };
+
   }
+
+
   render () {
     return (
       <Datasheet 
-        data={this.state.grid}
-        valueRenderer={(cell) => cell.value}
+       data={this.state.grid}
+      valueRenderer={(cell) => cell.value}
         onContextMenu={(e, cell, i, j) => cell.readOnly ? e.preventDefault() : null}
         onCellsChanged={changes => {
           const grid = this.state.grid.map(row => [...row])
@@ -48,6 +55,6 @@ export default class Table extends React.Component {
           this.setState({grid})
         }}
       />
-    )
+    ) 
   }
 }
