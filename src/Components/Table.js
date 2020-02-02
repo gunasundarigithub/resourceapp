@@ -11,17 +11,29 @@ export default class Table extends React.Component {
   const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
   let  Monthnumber=(new Date().getMonth())
   let monthName = monthNames[Monthnumber];
+  let Year=(new Date().getFullYear())
+  console.log(Year)
+  var getDaysInMonth = function(Monthnumber,Year) {
+  // Here January is 1 based
+  //Day 0 is the last day in the previous month
+ return new Date(Year, Monthnumber, 0).getDate();
+// Here January is 0 based
+// return new Date(year, month+1, 0).getDate();
+};
   this.state = {
   grid: [
         [
-          {readOnly: true, value:monthName},
-          {value: '1'},
-          {value: '2'},
-          {value: '3'},
-          {value: '4'},
-          {value: '5'},
-          
-        ],
+          {readOnly: true, value:monthName,Year},
+          // getDaysInMonth.map(day=>{
+          //   return {value:}
+          // })
+          {value: null},
+          {value: null},
+          {value: null},
+          {value: null},
+          {value: null},
+
+           ],
         [{readOnly: true, value: 'Employee-1'}, {value: null}, {value: null},{value: null},{value: null},{value: null}],
         [{readOnly: true, value: 'Employee-2'}, {value: null},{value: null},{value: null},{value: null},{value: null},],
         [{readOnly: true, value: 'Employee-3'}, {value: null},{value: null},{value: null},{value: null},{value: null}],
