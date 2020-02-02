@@ -8,13 +8,21 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleSharpIcon from '@material-ui/icons/AccountCircleSharp';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Drawer from '@material-ui/core/Drawer';
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import EventNoteIcon from '@material-ui/icons/EventNote';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -27,8 +35,16 @@ const useStyles = makeStyles(theme => ({
     width: 50,
     height: 50,
   },
+
+  EventNoteIcon:{
+    marginLeft: "auto",
+    marginRight: 15,
+    width: 40,
+    height: 40,
+  },
+  
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(3),
   },
   title: {
     display: 'none',
@@ -77,6 +93,32 @@ const useStyles = makeStyles(theme => ({
 
 export default function SearchAppBar() {
   const classes = useStyles();
+  const [state, setState] = React.useState({
+    left: false,
+  });
+
+  const toggleDrawer = (side, open) => event => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [side]: open });
+  };
+
+ const sideList = side => (
+    <div className={classes.list}>
+      <List >
+       <Divider />
+        {['Shift', 'Calender','Monthly_total_hours'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon> {<EventNoteIcon />}</ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+    </div>
+  );
 
   return (
     <div className={classes.root}>
@@ -85,12 +127,12 @@ export default function SearchAppBar() {
           <IconButton
             edge="start"
             className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-           
+            color="inherit">
+            <MenuIcon onClick={toggleDrawer('left', true)}>></MenuIcon>
           </IconButton>
+          <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
+        {sideList('left')}
+      </Drawer>
           <Typography className={classes.title} variant="h6" noWrap>
             Resource Scheduler
           </Typography>
@@ -107,6 +149,7 @@ export default function SearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
+          <EventNoteIcon className={classes.EventNoteIcon}/>
           <AccountCircleSharpIcon className={classes.AccountCircleSharpIcon} />
          </Toolbar>
           

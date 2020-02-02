@@ -1,9 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import SearchAppBar from './SearchAppBar.js'
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from '@material-ui/core/Button';
 import Table from './Components/Table';
 import Select from './Components/MaterialUI/Select';
