@@ -11,42 +11,39 @@ export default class Table extends React.Component {
   let monthName = monthNames[Monthnumber];
   let Year=(new Date().getFullYear())
   console.log(Year)
-  var getDaysInMonth = function(Monthnumber,Year) {
-  // Here January is 1 based
-  //Day 0 is the last day in the previous month
- return new Date(Year, Monthnumber, 0).getDate();
-// Here January is 0 based
-// return new Date(year, month+1, 0).getDate();
-for (let  i=1; i<=getDaysInMonth;i++){
-const days=[];
-days.push(i);
-console.log(days);
+  function daysInThisMonth() {
+  var now = new Date();
+  return new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
 }
-};
-  
-  let gridfunc=()=>{
-     const grid = [];
-
-    for (let i = 0; i <= 5; i++) {
-      const element = grid[i]; 
-      for (let j = 0; j <= getDaysInMonth+1 ; j++) {
-         grid[i[j]]={value:j}
-        
+console.log("daysinmonth",daysInThisMonth());
+ const gridtemporary = [];
+for(let i=0;i<=5;i++){
+    //console.log("comingnnggggggggg");
+    const arrayofarray=[];
+for(let j=0;j<=(daysInThisMonth());j++)
+  {
+    if (j==0 && i==0)
+      {arrayofarray.push({readOnly: true, value:monthName})
+      console.log("first if")
       }
-      
-    }
-  }
-  this.state = {
-
-// const grid: [ 
-//         [],]
+    else if(j!=0 && i==0)
+      {arrayofarray.push({readOnly: true, value:j})
+      console.log("second if")
+      }
+    else if(j==0 && i!=0 ){
+        arrayofarray.push({readOnly: true, value: 'Employee_name'})
+        console.log("third if")
+      }
+    else 
+    arrayofarray.push({value:null});
+  } 
+   gridtemporary[i]=arrayofarray;
+   console.log("arrayofrray",arrayofarray);
 }
-
-// const contentStyles = { background: 'silver', border: '1px solid black' };
-
-  }
-
-
+console.log("grid",gridtemporary);
+this.state = { grid:gridtemporary };
+  } 
+  
   render () {
     return (
       <Datasheet 
