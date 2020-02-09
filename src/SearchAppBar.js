@@ -23,6 +23,7 @@ import EventNoteIcon from '@material-ui/icons/EventNote';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MenuIcon from '@material-ui/icons/Menu';
+// import Calenderview from './Components/MaterialUI/Calenderview';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -149,7 +150,7 @@ export default function SearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <EventNoteIcon className={classes.EventNoteIcon}/>
+          <EventNoteIcon className={classes.EventNoteIcon} />
           <AccountCircleSharpIcon className={classes.AccountCircleSharpIcon} />
          </Toolbar>
           
