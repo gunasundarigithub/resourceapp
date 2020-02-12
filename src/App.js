@@ -10,10 +10,8 @@ class App extends React.Component{
 state= {
   showTable:false, //to show the table after clicking on the button
   showButton:false, //to show the button after clicking on the team from the drop down
-  selectedTeam: 'Ent_digital', //selected value from the drop down
-  
-
-    }
+  selectedTeam: '', //selected value from the drop down
+   }
 
 handleChange = (event,value) => {
   console.log(event.target.value);
@@ -33,7 +31,7 @@ const team_list = [
 //const [showTable, setShowTable] = useState(false);
 
 return (
-  <div className="App">
+<div className="App">
       <SearchAppBar/> 
       <div style={{width:'950px' }}>
       <div>

@@ -23,7 +23,9 @@ import EventNoteIcon from '@material-ui/icons/EventNote';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MenuIcon from '@material-ui/icons/Menu';
-import Calenderview from './Components/MaterialUI/Calenderview';
+import { AuthConsumer } from "./authContext";
+
+
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -94,12 +96,19 @@ const useStyles = makeStyles(theme => ({
 
 export default function SearchAppBar() {
   const classes = useStyles();
-  const Month=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  
-  
   const [state, setState] = React.useState({
     left: false,
   });
+
+  const Logout = () => (
+  <AuthConsumer>
+    {({ logout }) => (
+      <button className="btn btn-sm btn-default" onClick={logout}>
+        Logout
+      </button>
+    )}
+  </AuthConsumer>
+);
 
   const toggleDrawer = (side, open) => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -115,7 +124,7 @@ export default function SearchAppBar() {
        <Divider />
         {['Shift', 'Calender','Monthly_total_hours'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon> {<EventNoteIcon />}</ListItemIcon>
+           <ListItemIcon> {<EventNoteIcon />}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -153,8 +162,8 @@ export default function SearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <EventNoteIcon className={classes.EventNoteIcon} />
-          <AccountCircleSharpIcon className={classes.AccountCircleSharpIcon} />
+          <EventNoteIcon className={classes.EventNoteIcon} /> 
+          <AccountCircleSharpIcon className={classes.AccountCircleSharpIcon} onClick={Logout}  />
          </Toolbar>
           
         </AppBar>
