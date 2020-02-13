@@ -33,6 +33,8 @@ const team_list = [
 
 return (
   
+  <Home/>
+
 <div className="App">
       <SearchAppBar/> 
       <div style={{width:'950px' }}>
