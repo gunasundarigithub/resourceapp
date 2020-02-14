@@ -6,9 +6,9 @@ import {AuthProvider} from "../authContext";
 
  const AUTH_CONFIG = {
   domain: "dev-8qn6wqpr.auth0.com",
-  roleUrl: "https://rbac-tutorial-app/role",
+  roleUrl: "https://resourceapp/role",
   clientId: "taMHUr25QwK9L45m3uFudYB9GlZg6a0F",
-  callbackUrl: "http://localhost:3000/callback"
+  callbackUrl: "http://dev-8qn6wqpr.auth0.com/callback"
 };
 
 const auth = new auth0.WebAuth({

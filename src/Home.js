@@ -1,8 +1,8 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 
-import { AuthConsumer } from "../authContext";
-import Login from "../components/Login";
+import { AuthConsumer } from "./authContext";
+import Login from "./Components/Login";
 
 
 const HomePage = () => (
@@ -12,7 +12,7 @@ const HomePage = () => (
         <Redirect to="/App" />
       ) : (
         <div>
-          <h2>Welcome to React RBAC Tutorial.</h2>
+          <h2>Resource Scheduler</h2>
           <Login />
 
         </div>

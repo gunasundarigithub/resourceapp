@@ -24,6 +24,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MenuIcon from '@material-ui/icons/Menu';
 import { AuthConsumer } from "./authContext";
+import Select from '@material-ui/core/Select';
+import Month_list from './Components/MaterialUI/Month_list';
 
 
 
@@ -94,22 +96,42 @@ const useStyles = makeStyles(theme => ({
   
 }));
 
+
+
 export default function SearchAppBar() {
   const classes = useStyles();
+  
   const [state, setState] = React.useState({
     left: false,
+    
   });
 
-  const Logout = () => (
-  <AuthConsumer>
-    {({ logout }) => (
-      <button className="btn btn-sm btn-default" onClick={logout}>
-        Logout
-      </button>
-    )}
-  </AuthConsumer>
-);
 
+const Month_names=[
+  {mname:"January",key:1},
+  {mname:"Febuary",key:2},
+ {mname:"March",key:3}, 
+ {mname:"April",key:4} 
+ ];
+
+const Month_list = () => {
+return (
+    Month_names.map(Month_name => (
+   console.log("monthname",Month_name),
+    <ListItem button key={Month_name.mname}>
+           <ListItemIcon> {<EventNoteIcon />}</ListItemIcon>
+            <ListItemText text={Month_name.mname} />
+          </ListItem>
+     ))
+  );
+}
+// handleChange = (event,value) => {
+//   console.log(event.target.value);
+//   console.log(event)
+//   console.log(value)
+//     this.setState({ selectedMonth: event.target.value,showTable: true });
+//   }
+  
   const toggleDrawer = (side, open) => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -117,6 +139,9 @@ export default function SearchAppBar() {
 
     setState({ ...state, [side]: open });
   };
+
+
+
 
  const sideList = side => (
     <div className={classes.list}>
@@ -162,8 +187,8 @@ export default function SearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <EventNoteIcon className={classes.EventNoteIcon} /> 
-          <AccountCircleSharpIcon className={classes.AccountCircleSharpIcon} onClick={Logout}  />
+          <EventNoteIcon className={classes.EventNoteIcon} onClick={()=>Month_list(Month_names)} />
+          <AccountCircleSharpIcon className={classes.AccountCircleSharpIcon}   />
          </Toolbar>
           
         </AppBar>

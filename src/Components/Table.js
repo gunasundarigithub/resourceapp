@@ -11,6 +11,7 @@ export default class Table extends React.Component {
   let monthName = monthNames[Monthnumber];
   let Year=(new Date().getFullYear())
   console.log(Year)
+  
   function daysInThisMonth() {
   var now = new Date();
   return new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();

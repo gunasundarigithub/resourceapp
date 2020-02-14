@@ -38,20 +38,15 @@ span.data-grid-container, span.data-grid-container:focus {
   }
   
   .data-grid-container .data-grid .cell > .text {
-    padding: 2px 5px;
-    text-overflow: ellipsis;
-    overflow: hidden;
+     text-align: justify;
   }
   
   
   .data-grid-container .data-grid .cell > input {
-    outline: none !important;
-    text-align:right;
-    width: calc(100% - 6px);
-    height: 11px; 
+    outline: none; 
     background: none;
-    display: block;
-  }
+    text-align: justify;
+     }
   
   
   .data-grid-container .data-grid .cell {
@@ -86,5 +81,5 @@ span.data-grid-container, span.data-grid-container:focus {
   }
   
   .data-grid-container .data-grid .cell .value-viewer, .data-grid-container .data-grid .cell .data-editor {
-    display: block;
+     display: block; 
   }
