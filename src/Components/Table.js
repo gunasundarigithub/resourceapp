@@ -2,6 +2,8 @@ import _ from 'lodash';
 import React from 'react';
 import Datasheet from './Datasheet'
 import './react_datasheet.css'
+import DBconnection from '../Database/DBconnection';
+
 export default class Table extends React.Component {
 
   constructor (props) {

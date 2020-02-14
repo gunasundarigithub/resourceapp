@@ -52,14 +52,7 @@ console.log(tname,tid);
 return <MenuItem value={tid}>{tname}</MenuItem>
 
 //return (console.log(arrayvalue));})
-    })}
-
-          {/* <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Team</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem> */}
+    })}}
         </Select>
       </FormControl>
          </div>
