@@ -26,8 +26,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { AuthConsumer } from "./authContext";
 import Select from '@material-ui/core/Select';
 import Month_list from './Components/MaterialUI/Month_list';
-
-
+// import DropdownList from 'react-widgets/lib/DropdownList'
+import { DropdownList } from 'react-widgets'
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -116,13 +116,11 @@ const Month_names=[
 
 const Month_list = () => {
 return (
-    Month_names.map(Month_name => (
+  <div>
+    {Month_names.map(Month_name => (
    console.log("monthname",Month_name),
-    <ListItem button key={Month_name.mname}>
-           <ListItemIcon> {<EventNoteIcon />}</ListItemIcon>
-            <ListItemText text={Month_name.mname} />
-          </ListItem>
-     ))
+<DropdownList textField={Month_name.mname} />
+        ))}</div> 
   );
 }
 // handleChange = (event,value) => {
