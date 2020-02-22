@@ -30,8 +30,8 @@ import { DropdownList } from 'react-widgets'
 
 const useStyles = makeStyles(theme => ({
   grow: {
-    flexGrow: 1,
-    },
+    flexGrow: 0,
+     },
 
     AccountCircleSharpIcon: {
     marginLeft: "auto",
@@ -82,7 +82,7 @@ const useStyles = makeStyles(theme => ({
     },
   inputRoot: {
     color: 'inherit',
-  },
+     },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
     transition: theme.transitions.create('width'),
@@ -104,22 +104,8 @@ export default function SearchAppBar() {
   });
 
 
-const Month_names=[
-  {mname:"January",key:1},
-  {mname:"Febuary",key:2},
- {mname:"March",key:3}, 
- {mname:"April",key:4} 
- ];
 
-const Month_list = () => {
-return (
-  <div>
-    {Month_names.map(Month_name => (
-   console.log("monthname",Month_name),
-<DropdownList textField={Month_name.mname} />
-        ))}</div> 
-  );
-}
+
 // handleChange = (event,value) => {
 //   console.log(event.target.value);
 //   console.log(event)
@@ -141,8 +127,10 @@ return (
  const sideList = side => (
     <div className={classes.list}>
       <List >
+      <Divider />
+       <p align='center'> 2020 - Year </p>
        <Divider />
-        {['Shift', 'Calender','Monthly_total_hours'].map((text, index) => (
+        {['January','February','March','April','May','June','July','August','September','October','November','December'].map((text, index) => (
           <ListItem button key={text}>
            <ListItemIcon> {<EventNoteIcon />}</ListItemIcon>
             <ListItemText primary={text} />
@@ -182,10 +170,9 @@ return (
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <EventNoteIcon className={classes.EventNoteIcon} onClick={()=>Month_list(Month_names)} />
+          <EventNoteIcon className={classes.EventNoteIcon}  />
           <AccountCircleSharpIcon className={classes.AccountCircleSharpIcon}   />
          </Toolbar>
-          
         </AppBar>
         </div>
   );

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import Datasheet from './Datasheet'
 import './react_datasheet.css'
-import DBconnection from '../Database/DBconnection';
+
 
 export default class Table extends React.Component {
 
@@ -20,16 +20,16 @@ export default class Table extends React.Component {
 }
 console.log("daysinmonth",daysInThisMonth());
  const gridtemporary = [];
+ //console.log("need to give number of employee in teh loop ");
 for(let i=0;i<=5;i++){
-    //console.log("comingnnggggggggg");
-    const arrayofarray=[];
-for(let j=0;j<=(daysInThisMonth());j++)
+       const arrayofarray=[];
+for(let j=0;j<=(daysInThisMonth()+3);j++)
   {
     if (j==0 && i==0)
       {arrayofarray.push({readOnly: true, value:monthName})
       console.log("first if")
       }
-    else if(j!=0 && i==0)
+    else if((j!=0 && j<=(daysInThisMonth())) && i==0)
       {arrayofarray.push({readOnly: true, value:j})
       console.log("second if")
       }
@@ -37,6 +37,7 @@ for(let j=0;j<=(daysInThisMonth());j++)
         arrayofarray.push({readOnly: true, value: 'Employee_name'})
         console.log("third if")
       }
+      
     else 
     arrayofarray.push({value:null});
   } 
