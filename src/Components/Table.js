@@ -48,6 +48,11 @@ console.log("grid",gridtemporary);
 this.state = { grid:gridtemporary };
   } 
   
+  state= {
+  //showTable:false, //to show the table after clicking on the button
+  showButton:false, //to show the button after clicking on the team from the drop down
+   }
+
   render () {
     return (
       <Datasheet 

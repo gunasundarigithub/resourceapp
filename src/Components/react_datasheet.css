@@ -12,7 +12,7 @@ span.data-grid-container, span.data-grid-container:focus {
        transition : background-color 0ms ease ; 
   }
   .data-grid-container .data-grid .cell {
-    height: 17px;
+    height: 1px;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -23,7 +23,7 @@ span.data-grid-container, span.data-grid-container:focus {
     vertical-align: middle;
     text-align: left;
     border: 1px solid #DDD;
-    padding: 25px;
+    padding: 12px;
   }
   .data-grid-container .data-grid .cell.selected {
     border: 1px double rgb(33, 133, 208);

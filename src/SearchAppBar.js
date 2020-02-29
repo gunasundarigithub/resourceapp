@@ -9,7 +9,7 @@ import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircleSharpIcon from '@material-ui/icons/AccountCircleSharp';
+import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
@@ -23,7 +23,6 @@ import EventNoteIcon from '@material-ui/icons/EventNote';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MenuIcon from '@material-ui/icons/Menu';
-import { AuthConsumer } from "./authContext";
 import Select from '@material-ui/core/Select';
 // import DropdownList from 'react-widgets/lib/DropdownList'
 import { DropdownList } from 'react-widgets'
@@ -33,20 +32,13 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 0,
      },
 
-    AccountCircleSharpIcon: {
-    marginLeft: "auto",
-    marginRight: 15,
-    width: 50,
-    height: 50,
-  },
-
-  EventNoteIcon:{
+    ExitToAppRoundedIcon: {
     marginLeft: "auto",
     marginRight: 15,
     width: 40,
     height: 40,
   },
-  
+ 
   menuButton: {
     marginRight: theme.spacing(3),
   },
@@ -170,8 +162,7 @@ export default function SearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <EventNoteIcon className={classes.EventNoteIcon}  />
-          <AccountCircleSharpIcon className={classes.AccountCircleSharpIcon}   />
+          <ExitToAppRoundedIcon className={classes.ExitToAppRoundedIcon}/>
          </Toolbar>
         </AppBar>
         </div>
