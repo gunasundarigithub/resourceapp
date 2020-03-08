@@ -34,7 +34,7 @@ var DataEditor = function (_PureComponent) {
 
     var _this = _possibleConstructorReturn(this, (DataEditor.__proto__ || Object.getPrototypeOf(DataEditor)).call(this, props));
 
-    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleChange =_this.handleChange.bind(_this);
     return _this;
   }
 
@@ -46,7 +46,7 @@ var DataEditor = function (_PureComponent) {
   }, {
     key: 'handleChange',
     value: function handleChange(e) {
-      this.props.onChange(e.target.value);
+   this.props.onChange(e.target.value);
     }
   }, {
     key: 'render',

@@ -24,8 +24,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MenuIcon from '@material-ui/icons/Menu';
 import Select from '@material-ui/core/Select';
-// import DropdownList from 'react-widgets/lib/DropdownList'
-import { DropdownList } from 'react-widgets'
+import Table from './Components/Table';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -94,16 +93,6 @@ export default function SearchAppBar() {
     left: false,
     
   });
-
-
-
-
-// handleChange = (event,value) => {
-//   console.log(event.target.value);
-//   console.log(event)
-//   console.log(value)
-//     this.setState({ selectedMonth: event.target.value,showTable: true });
-//   }
   
   const toggleDrawer = (side, open) => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -113,19 +102,16 @@ export default function SearchAppBar() {
     setState({ ...state, [side]: open });
   };
 
-
-
-
- const sideList = side => (
+const sideList = side => (
     <div className={classes.list}>
       <List >
       <Divider />
        <p align='center'> 2020 - Year </p>
        <Divider />
         {['January','February','March','April','May','June','July','August','September','October','November','December'].map((text, index) => (
-          <ListItem button key={text}>
+          <ListItem button key={text} >
            <ListItemIcon> {<EventNoteIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={text}/>
           </ListItem>
         ))}
       </List>

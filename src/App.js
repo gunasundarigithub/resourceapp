@@ -45,8 +45,10 @@ return (
      </Button> :null }
     </div>
     </div>
-{this.state.showTable ? <div style={{display: 'inline-flex', justifyContent:'center', alignItems:'center', height: '500px'}}><Table></Table></div> : null }
+{this.state.showTable ? <div style={{display: 'inline-flex', justifyContent:'center', alignItems:'center', height: '500px'}}><Table></Table>
+ </div> : null }
 </div>
+
      );
 }
 }
