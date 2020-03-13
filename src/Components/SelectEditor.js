@@ -12,10 +12,8 @@ class SelectEditor extends PureComponent {
     super(props)
     this.handleChange = this.handleChange.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
-    this.state = {}
-
-    
-const options=[
+    this.state = {
+       options = [
           {label: '1', value: 1},
           {label: '2', value: 2},
           {label: '3', value: 3},
@@ -23,14 +21,16 @@ const options=[
           {label: '5', value: 5}
        ]
   }
-
+  }
 
   handleChange (opt) {
+    console.log("optttt",opt);
     const {onCommit, onRevert} = this.props
     if (!opt) {
       return onRevert()
     }
     const { e } = this.state
+console.log("eeeeee",e);
     onCommit(opt.value, e)
     console.log('COMMITTED', opt.value)
   }
@@ -47,17 +47,27 @@ const options=[
 
   render () {
     return (
-      <Select
-      options={this.options}
-        value={this.props.value}
-        onChange={this.handleChange}
-        onInputKeyDown={this.handleKeyDown}
-        // ref={input => { this._input = input }}
-    //  {options.map((option)=>
-    //  <MenuItem value={option.label}>{option.value}</MenuItem>
-     
-    //  )}
-      />
+       <div>
+     <FormControl variant="outlined" className={classes.formControl}>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={options}
+          onChange={handleChange}
+        >
+
+{console.log("test")}
+{props.items.map((options)=>{
+ 
+ const s=options.value;
+ const tid=options.label;
+console.log(s,tid);
+
+return <MenuItem value={tid}>{s}</MenuItem>
+    })}}
+        </Select>
+      </FormControl>
+         </div>
     )
   }
 }
