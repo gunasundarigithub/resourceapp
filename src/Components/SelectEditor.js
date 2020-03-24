@@ -10,24 +10,26 @@ import {ENTER_KEY, TAB_KEY} from './keys'
 class SelectEditor extends PureComponent {
   
 state={
-  selectedoption:''
+  selectedoption:''//selected value from drop down
 }
     
-// handleChange = (event,label) =>{
-// this.setState({selectedoption:event.target.label});
-// console.log("seletedvalueee",event.target.label);
-// }
-
-handleChange (selectedvalue) {
-  console.log("handlechange",selectedvalue);
-  const {onCommit, onRevert} = this.props
- if (!selectedvalue) {
-   return onRevert()
+ handleChange = (event,selectedvalue) => {
+  console.log(event.target.selectedvalue.label);
+  console.log(event)
+  console.log(selectedvalue)
+    this.setState({ selectedoption: event.target.selectedvalue.label });
   }
-  const { e } = this.state
- onCommit(selectedvalue.value, e)
-console.log('COMMITTED', selectedvalue.value)
-}
+
+// handleChange (selectedvalue) {
+//   console.log("handlechange",selectedvalue);
+//   const {onCommit, onRevert} = this.props
+//  if (!selectedvalue) {
+//    return onRevert()
+//   }
+//   const { e } = this.state
+//  onCommit(selectedvalue.value, e)
+// console.log('COMMITTED', selectedvalue.value)
+// }
 
 //   handleKeyDown (e) {
 //     // record last key pressed so we can handle enter
@@ -42,21 +44,20 @@ console.log('COMMITTED', selectedvalue.value)
   render () {
 
 const options=[
-          {label: 'M', key: 1},
-          {label: 'G', key: 2},
-          {label: 'S', key: 3},
-          {label: 'H', key: 4},
-          {label: 'V', key: 5},
-          {label: 'N', key: 6},
-          {label: 'E', key: 7}
+          {label: "M", key: 1},
+          {label: "G", key: 2},
+          {label: "S", key: 3},
+          {label: "H", key: 4},
+          {label: "V", key: 5},
+          {label: "N", key: 6},
+          {label: "E", key: 7}
        ]
 
     return (
       <Select
       options={this.options}
-        selectedvalue={this.state.selectedoption}
-        onChange={this.handleChange}
-        >
+        selectedvalue={console.log("selectedvalueeee",this.state.selectedoption)}
+        onChange={this.handleChange}>
       
 {console.log("selecteditor")}
 {options.map((array)=>{
