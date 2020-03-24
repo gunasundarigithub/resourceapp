@@ -8,66 +8,65 @@ import {ENTER_KEY, TAB_KEY} from './keys'
 
 
 class SelectEditor extends PureComponent {
-  constructor (props) {
-    super(props)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleKeyDown = this.handleKeyDown.bind(this)
-    this.state = {
-       options = [
-          {label: '1', value: 1},
-          {label: '2', value: 2},
-          {label: '3', value: 3},
-          {label: '4', value: 4},
-          {label: '5', value: 5}
-       ]
-  }
-  }
+  
+state={
+  selectedoption:''
+}
+    
+// handleChange = (event,label) =>{
+// this.setState({selectedoption:event.target.label});
+// console.log("seletedvalueee",event.target.label);
+// }
 
-  handleChange (opt) {
-    console.log("optttt",opt);
-    const {onCommit, onRevert} = this.props
-    if (!opt) {
-      return onRevert()
-    }
-    const { e } = this.state
-console.log("eeeeee",e);
-    onCommit(opt.value, e)
-    console.log('COMMITTED', opt.value)
+handleChange (selectedvalue) {
+  console.log("handlechange",selectedvalue);
+  const {onCommit, onRevert} = this.props
+ if (!selectedvalue) {
+   return onRevert()
   }
+  const { e } = this.state
+ onCommit(selectedvalue.value, e)
+console.log('COMMITTED', selectedvalue.value)
+}
 
-  handleKeyDown (e) {
-    // record last key pressed so we can handle enter
-    if (e.which === ENTER_KEY || e.which === TAB_KEY) {
-      e.persist()
-      this.setState({ e })
-    } else {
-      this.setState({ e: null })
-    }
-  }
+//   handleKeyDown (e) {
+//     // record last key pressed so we can handle enter
+//     if (e.which === ENTER_KEY || e.which === TAB_KEY) {
+//       e.persist()
+//       this.setState({ e })
+//     } else {
+//       this.setState({ e: null })
+//     }
+//   }
 
   render () {
+
+const options=[
+          {label: 'M', key: 1},
+          {label: 'G', key: 2},
+          {label: 'S', key: 3},
+          {label: 'H', key: 4},
+          {label: 'V', key: 5},
+          {label: 'N', key: 6},
+          {label: 'E', key: 7}
+       ]
+
     return (
-       <div>
-     <FormControl variant="outlined" className={classes.formControl}>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={options}
-          onChange={handleChange}
+      <Select
+      options={this.options}
+        selectedvalue={this.state.selectedoption}
+        onChange={this.handleChange}
         >
+      
+{console.log("selecteditor")}
+{options.map((array)=>{
+const temp=array.label;
+const temp1=array.key;
+console.log(temp,temp1);
+return <MenuItem value={temp1}>{temp}</MenuItem>
+})}
 
-{console.log("test")}
-{props.items.map((options)=>{
- 
- const s=options.value;
- const tid=options.label;
-console.log(s,tid);
-
-return <MenuItem value={tid}>{s}</MenuItem>
-    })}}
-        </Select>
-      </FormControl>
-         </div>
+      </Select>
     )
   }
 }
