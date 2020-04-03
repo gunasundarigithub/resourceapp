@@ -38,7 +38,7 @@ for(let j=0;j<=(daysInThisMonth()+6);j++)
              if(j==daysInThisMonth()+1) {
            {arrayofarray.push({readOnly: true, value:"G"})}    
              }
-      if(j==daysInThisMonth()+2) {
+            if(j==daysInThisMonth()+2) {
            {arrayofarray.push({readOnly: true, value:"M"})}    
              }    
              if(j==daysInThisMonth()+3) {
@@ -58,10 +58,13 @@ for(let j=0;j<=(daysInThisMonth()+6);j++)
         arrayofarray.push({readOnly: true, value: 'Employee_name'})
         console.log("third if")
       }
-      
+      else if (j>daysInThisMonth()) {
+      arrayofarray.push({ value:null})
+        console.log("formula")
+      }
     else 
     arrayofarray.push({dataEditor: SelectEditor});
-  } 
+} 
    gridtemporary[i]=arrayofarray;
    console.log("arrayofrray",arrayofarray);
 }
@@ -90,32 +93,27 @@ this.state = { grid:gridtemporary };
     grid.splice(to, 0, ...grid.splice(from, 1))
     this.setState({ grid })
   }
-
   // renderSheet (props) {
   //   return <SheetRenderer columns={this.state.columns} onColumnDrop={this.handleColumnDrop} {...props} />
   // }
-
   // renderRow (props) {
   //   const {row, cells, ...rest} = props
   //   return <RowRenderer rowIndex={row} onRowDrop={this.handleRowDrop} {...rest} />
   // }
 
-  
-
-  render () {
-    return (
-      <Datasheet 
-       data={this.state.grid} 
+render () {
+return (
+<Datasheet 
+  data={this.state.grid} 
   valueRenderer={(cell) => cell.value}
   onContextMenu={(e, cell, i, j) => cell.readOnly ? e.preventDefault() : null}
   onCellsChanged={changes => { 
-          const grid = this.state.grid.map(row => [...row])
-          changes.forEach(({cell, row, col, value}) => {
-            grid[row][col] = {...grid[row][col], value}
-          })
-          this.setState({grid})
+  const grid = this.state.grid.map(row => [...row])
+  changes.forEach(({cell, row, col, value}) => {
+  grid[row][col] = {...grid[row][col], value}
+  })
+  this.setState({grid})
         }}
-/> 
-    ) 
+/>  ) 
   }
-}
+} 

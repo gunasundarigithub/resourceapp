@@ -10,14 +10,14 @@ import {ENTER_KEY, TAB_KEY} from './keys'
 class SelectEditor extends PureComponent {
   
 state={
-  selectedoption:''//selected value from drop down
+  selectedoption:' '//selected value from drop down
 }
     
  handleChange = (event,selectedvalue) => {
-  console.log(event.target.selectedvalue.label);
+  console.log("selectedvalue",event.target.selectedvalue);
   console.log(event)
   console.log(selectedvalue)
-    this.setState({ selectedoption: event.target.selectedvalue.label });
+    this.setState({ selectedoption: event.target.selectedvalue });
   }
 
 // handleChange (selectedvalue) {
@@ -52,11 +52,11 @@ const options=[
           {label: "N", key: 6},
           {label: "E", key: 7}
        ]
-
+console.log("seeeeeee",this.state.selectedoption)
     return (
       <Select
       options={this.options}
-        selectedvalue={console.log("selectedvalueeee",this.state.selectedoption)}
+        selectedvalue={options.label}
         onChange={this.handleChange}>
       
 {console.log("selecteditor")}
