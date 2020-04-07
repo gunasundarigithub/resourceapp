@@ -1,3 +1,4 @@
+
 import React from 'react';
 import './App.css';
 import Button from '@material-ui/core/Button';
@@ -6,7 +7,7 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 
 firebase.initializeApp({
 apiKey:"AIzaSyA0eJHnVGp6tOvMrUve7ajU8BU_0xNxn4w",
-authDomain:"authentication-b6934.firebaseapp.com"
+authDomain:"authentication-b6934.firebaseapp.com",
 
 })
 
@@ -15,6 +16,7 @@ state = {isSignedIn: false}
 
 uiConfig = {
 signInFlow:"popup",
+signInSuccessUrl:"http://localhost:3000/",
 signInOptions:[
 firebase.auth.GoogleAuthProvider.PROVIDER_ID
 ],

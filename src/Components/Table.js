@@ -88,6 +88,7 @@ this.state = { grid:gridtemporary };
     this.setState({ columns, grid })
   }
 
+
   handleRowDrop (from, to) {
     const grid = [ ...this.state.grid ]
     grid.splice(to, 0, ...grid.splice(from, 1))

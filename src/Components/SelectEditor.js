@@ -52,11 +52,10 @@ const options=[
           {label: "N", key: 6},
           {label: "E", key: 7}
        ]
-console.log("seeeeeee",this.state.selectedoption)
+
     return (
       <Select
-      options={this.options}
-        selectedvalue={options.label}
+      selectedvalue={this.state.selectedoption}
         onChange={this.handleChange}>
       
 {console.log("selecteditor")}
