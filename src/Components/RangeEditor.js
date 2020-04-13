@@ -29,17 +29,17 @@ class RangeEditor extends PureComponent {
   }
 }
 
-const FillViewer = props => {
-  const { value } = props
-  return (
-    <div style={{width: '100%'}}>
-      {["M", "G", "V", "H", "S"].map(v => {
-        return (
-          <div key={v} style={{float: 'left', width: '20%', height: '17px'}} />
-        )
-      })}
-    </div>
-  )
-}
+// const FillViewer = props => {
+//   const { value } = props
+//   return (
+//     <div style={{width: '100%'}}>
+//       {["M", "G", "V", "H", "S"].map(v => {
+//         return (
+//           <div key={v} style={{float: 'left', width: '20%', height: '17px'}} />
+//         )
+//       })}
+//     </div>
+//   )
+// }
 
 export default RangeEditor;

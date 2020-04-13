@@ -38,14 +38,14 @@ var ValueViewer = function (_PureComponent) {
   _createClass(ValueViewer, [{
     key: 'render',
     value: function render() {
-      var value = this.props.value;
-
+     var value = this.props.value;
+      console.log("value from valueviewer",value)
       return _react2.default.createElement(
         'span',
         { className: 'value-viewer' },
         value
       );
-    }
+    } 
   }]);
 
   return ValueViewer;
@@ -58,5 +58,6 @@ ValueViewer.propTypes = {
   row: _propTypes2.default.number.isRequired,
   col: _propTypes2.default.number.isRequired,
   cell: _propTypes2.default.shape(_CellShape2.default),
-  value: _propTypes2.default.node.isRequired
+  value: _propTypes2.default.node.isRequired,
+
 };

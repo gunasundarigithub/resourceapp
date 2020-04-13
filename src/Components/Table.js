@@ -4,11 +4,28 @@ import Datasheet from './Datasheet';
 import './react_datasheet.css';
 import SelectEditor from './SelectEditor';
 import RangeEditor from './RangeEditor';
+import SheetRenderer from './SheetRenderer';
+import { DragDropContextProvider } from 'react-dnd'
+import {ENTER_KEY, TAB_KEY} from './keys'
+import FillViewer from './SelectEditor'
+
+import {
+  colDragSource, colDropTarget,
+  rowDragSource, rowDropTarget
+} from './drag-drop.js'
+
+ 
 
 export default class Table extends React.Component {
 
   constructor (props) {
   super(props)
+
+    this.handleColumnDrop = this.handleColumnDrop.bind(this)
+    this.handleRowDrop = this.handleRowDrop.bind(this)
+    this.renderSheet = this.renderSheet.bind(this)
+    this.renderRow = this.renderRow.bind(this)
+
   const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
   let  Monthnumber=(new Date().getMonth())
   let monthName = monthNames[Monthnumber];
@@ -63,7 +80,7 @@ for(let j=0;j<=(daysInThisMonth()+6);j++)
         console.log("formula")
       }
     else 
-    arrayofarray.push({dataEditor: SelectEditor});
+    arrayofarray.push({dataEditor: SelectEditor,valueViewer: FillViewer});
 } 
    gridtemporary[i]=arrayofarray;
    console.log("arrayofrray",arrayofarray);
@@ -77,44 +94,64 @@ this.state = { grid:gridtemporary };
   showButton:false, //to show the button after clicking on the team from the drop down
    }
 
-   handleColumnDrop (from, to) {
+
+ handleColumnDrop (from, to) {
     const columns = [...this.state.columns]
     columns.splice(to, 0, ...columns.splice(from, 1))
     const grid = this.state.grid.map(r => {
-      const row = [...r]
+        const row = [...r]
       row.splice(to, 0, ...row.splice(from, 1))
       return row
     })
     this.setState({ columns, grid })
   }
 
-
   handleRowDrop (from, to) {
     const grid = [ ...this.state.grid ]
     grid.splice(to, 0, ...grid.splice(from, 1))
     this.setState({ grid })
   }
-  // renderSheet (props) {
-  //   return <SheetRenderer columns={this.state.columns} onColumnDrop={this.handleColumnDrop} {...props} />
-  // }
-  // renderRow (props) {
-  //   const {row, cells, ...rest} = props
-  //   return <RowRenderer rowIndex={row} onRowDrop={this.handleRowDrop} {...rest} />
-  // }
 
+ 
+
+  renderSheet (props) {
+    return <SheetRenderer columns={this.state.columns} onColumnDrop={this.handleColumnDrop} {...props} />
+  }
+
+  renderRow (props) {
+    const {row, cells, ...rest} = props
+    return <RowRenderer rowIndex={row} onRowDrop={this.handleRowDrop} {...rest} />
+  }
+  
 render () {
 return (
 <Datasheet 
   data={this.state.grid} 
+  
+  //dataRenderer={(cell,i,j)=>j==31 ? cell.expr=cell.value + 8:cell.value}
   valueRenderer={(cell) => cell.value}
   onContextMenu={(e, cell, i, j) => cell.readOnly ? e.preventDefault() : null}
   onCellsChanged={changes => { 
   const grid = this.state.grid.map(row => [...row])
-  changes.forEach(({cell, row, col, value}) => {
-  grid[row][col] = {...grid[row][col], value}
-  })
-  this.setState({grid})
-        }}
+changes.forEach(({cell, row, col, value}) => {
+grid[row][col] = {...grid[row][col], value}
+   })
+this.setState({grid})
+    }}
 />  ) 
   }
 } 
+
+const RowRenderer = rowDropTarget(rowDragSource((props) => {
+  const { isOver, children, connectDropTarget, connectDragPreview, connectDragSource } = props
+  const className = isOver ? 'drop-target' : ''
+  return connectDropTarget(connectDragPreview(
+    <tr className={className}>
+      { connectDragSource(<td className='cell read-only row-handle' key='$$actionCell' />)}
+      { children }
+    </tr>
+  ))
+}))
+
+
+

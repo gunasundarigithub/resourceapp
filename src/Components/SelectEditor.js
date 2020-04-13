@@ -5,6 +5,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Datasheet from './Datasheet';
 import {ENTER_KEY, TAB_KEY} from './keys'
+import './react_datasheet.css';
 
 
 class SelectEditor extends PureComponent {
@@ -13,11 +14,13 @@ state={
   selectedoption:' '//selected value from drop down
 }
     
- handleChange = (event,selectedvalue) => {
-  console.log("selectedvalue",event.target.selectedvalue);
+
+
+ handleChange = (event,Svalue) => {
+  console.log("Svalue",event.target.value);
   console.log(event)
-  console.log(selectedvalue)
-    this.setState({ selectedoption: event.target.selectedvalue });
+  console.log(Svalue)
+    this.setState({ selectedoption: event.target.value });
   }
 
 // handleChange (selectedvalue) {
@@ -53,16 +56,14 @@ const options=[
           {label: "E", key: 7}
        ]
 
+
     return (
-      <Select
-      selectedvalue={this.state.selectedoption}
+      <Select class="MuiInputBase-input"
+      Svalue={this.state.selectedoption}
         onChange={this.handleChange}>
-      
-{console.log("selecteditor")}
 {options.map((array)=>{
 const temp=array.label;
 const temp1=array.key;
-console.log(temp,temp1);
 return <MenuItem value={temp1}>{temp}</MenuItem>
 })}
 
@@ -71,3 +72,19 @@ return <MenuItem value={temp1}>{temp}</MenuItem>
   }
 }
 export default SelectEditor;
+
+
+const FillViewer = props => {
+  const { Svalue } = props
+  return (
+ 
+    <div value={Svalue}/>
+      /* {[1, 2, 3, 4, 5].map(v => {
+        const backgroundColor = v > value ? 'transparent' : '#007eff'
+        return (
+          <div key={v} style={{float: 'left', width: '20%', height: '17px', backgroundColor}} />
+        )
+      })} */
+    
+  )
+}

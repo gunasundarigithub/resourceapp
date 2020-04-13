@@ -19,6 +19,7 @@
     "react-axios": "^2.0.3",
     "react-calendar": "^2.19.2",
     "react-datasheet": "^1.4.0",
+    "react-dnd": "^10.0.2",
     "react-dom": "^16.12.0",
     "react-firebaseui": "^4.1.0",
     "react-responsive-widget": "^1.0.3",
