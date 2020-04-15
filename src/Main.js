@@ -41,13 +41,21 @@ return (
       <div>
       <br/>
       <Select title="Enterprise Teams" change={this.handleChange} items={team_list} selectedName={this.state.selectedTeam}   />
-    { this.state.showButton ? <Button variant="contained" color="secondary"  className="bStyle" onClick={() => {this.setState({showTable:true})} }>
+    { this.state.showButton ? <Button variant="contained"  color="secondary"  className="bStyle" onClick={() => {this.setState({showTable:true})} }>
        Create/edit/view schedule
      </Button> :null }
     </div>
     </div>
-{this.state.showTable ? <div style={{display: 'inline-flex', justifyContent:'center', alignItems:'center', height: '500px'}}><Table></Table>
+{this.state.showTable ? 
+ 
+ <div style={{display:'inline-block',marginRight: '0em',marginTop: '5em',justify_content:'center', align_items:'center'}}>
+ <Table></Table>
+<br/>
+<Button variant="contained"  color="secondary">Submit</Button>
+       
  </div> : null }
+
+
 </div>
 
      );

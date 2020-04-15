@@ -104,6 +104,6 @@ span.data-grid-container, span.data-grid-container:focus {
   text-shadow: 0 0 black;
   padding:5px 
 }
-.MuiSvgIcon-root {
-  
+.MuiSvgIcon-root.path[Attributes] {
+    d: none;
 }
