@@ -21,16 +21,17 @@ export default class Table extends React.Component {
   constructor (props) {
   super(props)
 
-    this.handleColumnDrop = this.handleColumnDrop.bind(this)
-    this.handleRowDrop = this.handleRowDrop.bind(this)
-    this.renderSheet = this.renderSheet.bind(this)
-    this.renderRow = this.renderRow.bind(this)
+      // this.handleColumnDrop = this.handleColumnDrop.bind(this)
+      // this.handleRowDrop = this.handleRowDrop.bind(this)
+      // this.renderSheet = this.renderSheet.bind(this)
+      // this.renderRow = this.renderRow.bind(this)
 
   const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
   let  Monthnumber=(new Date().getMonth())
   let monthName = monthNames[Monthnumber];
   let Year=(new Date().getFullYear())
   console.log(Year)
+
   
   function daysInThisMonth() {
   var now = new Date();
@@ -53,7 +54,7 @@ for(let j=0;j<=(daysInThisMonth()+6);j++)
       }
       else if (i==0 && j>(daysInThisMonth())){
              if(j==daysInThisMonth()+1) {
-           {arrayofarray.push({readOnly: true, value:"G"})}    
+           {arrayofarray.push({readOnly: true, value:"G",expr:'8'})}    
              }
             if(j==daysInThisMonth()+2) {
            {arrayofarray.push({readOnly: true, value:"M"})}    
@@ -95,63 +96,64 @@ this.state = { grid:gridtemporary };
    }
 
 
- handleColumnDrop (from, to) {
-    const columns = [...this.state.columns]
-    columns.splice(to, 0, ...columns.splice(from, 1))
-    const grid = this.state.grid.map(r => {
-        const row = [...r]
-      row.splice(to, 0, ...row.splice(from, 1))
-      return row
-    })
-    this.setState({ columns, grid })
-  }
+//  handleColumnDrop (from, to) {
+//     const columns = [...this.state.columns]
+//     columns.splice(to, 0, ...columns.splice(from, 1))
+//     const grid = this.state.grid.map(r => {
+//         const row = [...r]
+//       row.splice(to, 0, ...row.splice(from, 1))
+//       return row
+//     })
+//     this.setState({ columns, grid })
+//   }
 
-  handleRowDrop (from, to) {
-    const grid = [ ...this.state.grid ]
-    grid.splice(to, 0, ...grid.splice(from, 1))
-    this.setState({ grid })
-  }
+//   handleRowDrop (from, to) {
+//     const grid = [ ...this.state.grid ]
+//     grid.splice(to, 0, ...grid.splice(from, 1))
+//     this.setState({ grid })
+//   }
 
  
 
-  renderSheet (props) {
-    return <SheetRenderer columns={this.state.columns} onColumnDrop={this.handleColumnDrop} {...props} />
-  }
+//   renderSheet (props) {
+//     return <SheetRenderer columns={this.state.columns} onColumnDrop={this.handleColumnDrop} {...props} />
+//   }
 
-  renderRow (props) {
-    const {row, cells, ...rest} = props
-    return <RowRenderer rowIndex={row} onRowDrop={this.handleRowDrop} {...rest} />
-  }
+//   renderRow (props) {
+//     const {row, cells, ...rest} = props
+//     return <RowRenderer rowIndex={row} onRowDrop={this.handleRowDrop} {...rest} />
+//   }
   
 render () {
 return (
 <Datasheet 
   data={this.state.grid} 
   
-  //dataRenderer={(cell,i,j)=>j==31 ? cell.expr=cell.value + 8:cell.value}
+  dataRenderer={(cell,i,j)=>j==31 ? cell.value : cell.value}
   valueRenderer={(cell) => cell.value}
   onContextMenu={(e, cell, i, j) => cell.readOnly ? e.preventDefault() : null}
   onCellsChanged={changes => { 
   const grid = this.state.grid.map(row => [...row])
 changes.forEach(({cell, row, col, value}) => {
 grid[row][col] = {...grid[row][col], value}
-   })
+console.log("changed value",row,col,value)
+ })
 this.setState({grid})
     }}
 />  ) 
   }
 } 
 
-const RowRenderer = rowDropTarget(rowDragSource((props) => {
-  const { isOver, children, connectDropTarget, connectDragPreview, connectDragSource } = props
-  const className = isOver ? 'drop-target' : ''
-  return connectDropTarget(connectDragPreview(
-    <tr className={className}>
-      { connectDragSource(<td className='cell read-only row-handle' key='$$actionCell' />)}
-      { children }
-    </tr>
-  ))
-}))
+// const RowRenderer = rowDropTarget(rowDragSource((props) => {
+//   const { isOver, children, connectDropTarget, connectDragPreview,connectDragSource } = props
+//   const className = isOver ? 'drop-target' : ''
+//   return connectDropTarget(connectDragPreview(
+//     <tr className={className}>
+//       { connectDragSource(<td className='cell read-only row-handle' key='$$actionCell' />)}
+//       { children }
+//     </tr>
+//   ))
+// }))
 
 
 

@@ -50,16 +50,17 @@ const options=[
           {label: "M", key: 1},
           {label: "G", key: 2},
           {label: "S", key: 3},
+          {label: "L", key: 6},
+          {label: "E", key: 7},
           {label: "H", key: 4},
-          {label: "V", key: 5},
-          {label: "N", key: 6},
-          {label: "E", key: 7}
+          {label: "V", key: 5}
+          
        ]
 
 
     return (
-      <Select class="MuiInputBase-input"
-      Svalue={this.state.selectedoption}
+      <Select class="MuiInputBase-root MuiInput-root MuiInput MuiInputBase-input" 
+      svalue={this.state.selectedoption}
         onChange={this.handleChange}>
 {options.map((array)=>{
 const temp=array.label;
@@ -75,10 +76,10 @@ export default SelectEditor;
 
 
 const FillViewer = props => {
-  const { Svalue } = props
+  const { svalue } = props
   return (
  
-    <div value={Svalue}/>
+    <div value={svalue}/>
       /* {[1, 2, 3, 4, 5].map(v => {
         const backgroundColor = v > value ? 'transparent' : '#007eff'
         return (

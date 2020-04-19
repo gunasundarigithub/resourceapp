@@ -39,7 +39,7 @@ var ValueViewer = function (_PureComponent) {
     key: 'render',
     value: function render() {
      var value = this.props.value;
-      console.log("value from valueviewer",value)
+      // console.log("value from valueviewer",value)
       return _react2.default.createElement(
         'span',
         { className: 'value-viewer' },
