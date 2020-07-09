@@ -28,11 +28,24 @@ export default class Table extends React.Component {
 
   const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
   let  Monthnumber=(new Date().getMonth())
+  console.log("monthnumber",Monthnumber);
   let monthName = monthNames[Monthnumber];
   let Year=(new Date().getFullYear())
-  console.log(Year)
+  console.log("year",Year);
 
-  
+  var getDaysArray = function(year, monthIndex) {
+  //var monthIndex = month - 1; 
+  // 0..11 instead of 1..12
+  var names = [ 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat' ];
+  var date = new Date(year, monthIndex, 1);
+  var result = [];
+  while (date.getMonth() == monthIndex) {
+    result.push(date.getDate() + "-" + names[date.getDay()]);
+    date.setDate(date.getDate() + 1);
+  }
+  console.log("dayyyyyyyyyyy",result);
+  return result;
+} 
   function daysInThisMonth() {
   var now = new Date();
   return new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
@@ -40,7 +53,7 @@ export default class Table extends React.Component {
 console.log("daysinmonth",daysInThisMonth());
  const gridtemporary = [];
  //console.log("need to give number of employee in teh loop ");
-for(let i=0;i<=5;i++){
+for(let i=0;i<=6;i++){
        const arrayofarray=[];
 for(let j=0;j<=(daysInThisMonth()+6);j++)
   {
@@ -48,9 +61,14 @@ for(let j=0;j<=(daysInThisMonth()+6);j++)
       {arrayofarray.push({readOnly: true, value:monthName})
       console.log("first if")
       }
+      else if((j!=0 && j<=(daysInThisMonth())) && i==1){
+      {arrayofarray.push({readOnly: true, value:getDaysArray(Year,Monthnumber)})
+      console.log("second if",getDaysArray)
+      }
+      }
     else if((j!=0 && j<=(daysInThisMonth())) && i==0)
       {arrayofarray.push({readOnly: true, value:j})
-      console.log("second if")
+      console.log("third if")
       }
       else if (i==0 && j>(daysInThisMonth())){
              if(j==daysInThisMonth()+1) {
@@ -72,9 +90,12 @@ for(let j=0;j<=(daysInThisMonth()+6);j++)
            {arrayofarray.push({readOnly: true, value:"Total_Hours"})}    
              }     
 }
-    else if(j==0 && i!=0 ){
+    else if(j==0 && i!=0 && i!=1){
         arrayofarray.push({readOnly: true, value: 'Employee_name'})
         console.log("third if")
+      }
+      else if (j==0 && i==1){
+        arrayofarray.push({readOnly: true, value: 'Days'})
       }
       else if (j>daysInThisMonth()) {
       arrayofarray.push({ value:null})
