@@ -27,26 +27,37 @@ export default class Table extends React.Component {
       // this.renderRow = this.renderRow.bind(this)
 
   const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  let  Monthnumber=(new Date().getMonth())
+  let  Monthnumber=(new Date().getMonth())//month number- 0 is jan // 0..11 instead of 1..12
   console.log("monthnumber",Monthnumber);
   let monthName = monthNames[Monthnumber];
-  let Year=(new Date().getFullYear())
+  let Year=(new Date().getFullYear())//current year
   console.log("year",Year);
 
+// to get the days in the days rows
   var getDaysArray = function(year, monthIndex) {
   //var monthIndex = month - 1; 
-  // 0..11 instead of 1..12
   var names = [ 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat' ];
   var date = new Date(year, monthIndex, 1);
   var result = [];
   while (date.getMonth() == monthIndex) {
-    result.push(date.getDate() + "-" + names[date.getDay()]);
+    result.push(names[date.getDay()]);
     date.setDate(date.getDate() + 1);
   }
   console.log("dayyyyyyyyyyy",result);
   return result;
-} 
-  function daysInThisMonth() {
+}
+
+// function day_row_value (){
+// var days=getDaysArray(Year,Monthnumber)
+//  {days.map(day =>
+//  console.log(day)
+//  );
+//  }
+//  return day;
+//  }
+
+//Calculating number of days in current  month
+function daysInThisMonth() {
   var now = new Date();
   return new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
 }
@@ -117,34 +128,6 @@ this.state = { grid:gridtemporary };
    }
 
 
-//  handleColumnDrop (from, to) {
-//     const columns = [...this.state.columns]
-//     columns.splice(to, 0, ...columns.splice(from, 1))
-//     const grid = this.state.grid.map(r => {
-//         const row = [...r]
-//       row.splice(to, 0, ...row.splice(from, 1))
-//       return row
-//     })
-//     this.setState({ columns, grid })
-//   }
-
-//   handleRowDrop (from, to) {
-//     const grid = [ ...this.state.grid ]
-//     grid.splice(to, 0, ...grid.splice(from, 1))
-//     this.setState({ grid })
-//   }
-
- 
-
-//   renderSheet (props) {
-//     return <SheetRenderer columns={this.state.columns} onColumnDrop={this.handleColumnDrop} {...props} />
-//   }
-
-//   renderRow (props) {
-//     const {row, cells, ...rest} = props
-//     return <RowRenderer rowIndex={row} onRowDrop={this.handleRowDrop} {...rest} />
-//   }
-  
 render () {
 return (
 <Datasheet 
