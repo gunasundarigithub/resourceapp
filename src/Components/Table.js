@@ -21,11 +21,6 @@ export default class Table extends React.Component {
   constructor (props) {
   super(props)
 
-      // this.handleColumnDrop = this.handleColumnDrop.bind(this)
-      // this.handleRowDrop = this.handleRowDrop.bind(this)
-      // this.renderSheet = this.renderSheet.bind(this)
-      // this.renderRow = this.renderRow.bind(this)
-
   const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
   let  Monthnumber=(new Date().getMonth())//month number- 0 is jan // 0..11 instead of 1..12
   console.log("monthnumber",Monthnumber);
@@ -68,12 +63,16 @@ for(let i=0;i<=6;i++){
        const arrayofarray=[];
 for(let j=0;j<=(daysInThisMonth()+6);j++)
   {
+    console.log("arrayofrray after2 nd for loop",arrayofarray);
     if (j==0 && i==0)
       {arrayofarray.push({readOnly: true, value:monthName})
       console.log("first if")
       }
-      else if((j!=0 && j<=(daysInThisMonth())) && i==1){
-      {arrayofarray.push({readOnly: true, value:getDaysArray(Year,Monthnumber)})
+      else if((j!=0 && j<=(daysInThisMonth()) && i==1)){
+        var days=getDaysArray(Year,Monthnumber)[j-1]
+        console.log("monthdayssssss",days);
+        console.log("j oda value",j)
+      {arrayofarray.push({readOnly: true, value:days})
       console.log("second if",getDaysArray)
       }
       }
@@ -83,7 +82,7 @@ for(let j=0;j<=(daysInThisMonth()+6);j++)
       }
       else if (i==0 && j>(daysInThisMonth())){
              if(j==daysInThisMonth()+1) {
-           {arrayofarray.push({readOnly: true, value:"G",expr:'8'})}    
+           {arrayofarray.push({readOnly: true, value:"G"})}    
              }
             if(j==daysInThisMonth()+2) {
            {arrayofarray.push({readOnly: true, value:"M"})}    
