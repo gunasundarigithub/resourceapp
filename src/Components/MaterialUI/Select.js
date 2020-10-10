@@ -44,14 +44,14 @@ export default function SimpleSelect(props) {
 {console.log("test")}
 {props.items.map((arrayvalue)=>{
  
- const tname=arrayvalue.team_name;
- const tid=arrayvalue.team_id;
+ const tname=arrayvalue.Team_name;
+ const tid=arrayvalue.Team_id;
 console.log(tname,tid);
 
 return <MenuItem value={tid}>{tname}</MenuItem>
 
 //return (console.log(arrayvalue));})
-    })}}
+    })}
         </Select>
       </FormControl>
          </div>
