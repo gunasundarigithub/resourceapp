@@ -8,7 +8,6 @@ import SheetRenderer from './SheetRenderer';
 import { DragDropContextProvider } from 'react-dnd'
 import {ENTER_KEY, TAB_KEY} from './keys'
 import FillViewer from './SelectEditor'
-import axios from '../Axios/axios'
 
 import {
   colDragSource, colDropTarget,
@@ -19,44 +18,8 @@ import {
 
 export default class Table extends React.Component {
 
-  // constructor (props) {
-  // super(props)
-  // }
-
-  state= {
-    //showTable:false, //to show the table after clicking on the button
-    showButton:false, //to show the button after clicking on the team from the drop down
-    grid:[]
-     }
-
-//To call the current month or respective month shift plan from MS access excel
-
-componentDidMount(){
-  axios.get('/getemployee',{
-    params:{
-      team_id:this.props.selectedName,
-    }
-  }).then(res=>{
-    console.log("employee details",res.data)
-  })
-  } 
-  
-  componentDidUpdate(prevProps,prevState){
-    console.log("cinside compoenent")
-    if(prevProps!=this.props.selectedName && prevState!=this.state.grid) {
-      axios.get('/getcurrentshift',{
-        params:{
-          team_id:this.props.selectedName,
-          month_number:this.props.Monthnumber+1
-        }
-      }).then(res=>{
-        console.log("current month shift plan",res.data)
-      })
-    }
-  }
-
- 
-render () {
+  constructor (props) {
+  super(props)
 
   const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
   let  Monthnumber=(new Date().getMonth())//month number- 0 is jan // 0..11 instead of 1..12
@@ -75,9 +38,18 @@ render () {
     result.push(names[date.getDay()]);
     date.setDate(date.getDate() + 1);
   }
-  //console.log("dayyyyyyyyyyy",result);
+  console.log("dayyyyyyyyyyy",result);
   return result;
 }
+
+// function day_row_value (){
+// var days=getDaysArray(Year,Monthnumber)
+//  {days.map(day =>
+//  console.log(day)
+//  );
+//  }
+//  return day;
+//  }
 
 //Calculating number of days in current  month
 function daysInThisMonth() {
@@ -85,9 +57,8 @@ function daysInThisMonth() {
   return new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
 }
 console.log("daysinmonth",daysInThisMonth());
-
  //To form the shift table 
- const gridtemporary = [];
+const gridtemporary = [];
  //console.log("need to give number of employee in teh loop ");
 for(let i=0;i<=6;i++){
        const arrayofarray=[];
@@ -96,19 +67,19 @@ for(let j=0;j<=(daysInThisMonth()+6);j++)
     console.log("arrayofrray after2 nd for loop",arrayofarray);
     if (j==0 && i==0)
       {arrayofarray.push({readOnly: true, value:monthName})
-      //console.log("first if")
+      console.log("first if")
       }
       else if((j!=0 && j<=(daysInThisMonth()) && i==1)){
         var days=getDaysArray(Year,Monthnumber)[j-1]
         console.log("monthdayssssss",days);
         console.log("j oda value",j)
       {arrayofarray.push({readOnly: true, value:days})
-      //console.log("second if",getDaysArray)
+      console.log("second if",getDaysArray)
       }
       }
     else if((j!=0 && j<=(daysInThisMonth())) && i==0)
       {arrayofarray.push({readOnly: true, value:j})
-      //console.log("third if")
+      console.log("third if")
       }
       else if (i==0 && j>(daysInThisMonth())){
              if(j==daysInThisMonth()+1) {
@@ -132,28 +103,32 @@ for(let j=0;j<=(daysInThisMonth()+6);j++)
 }
     else if(j==0 && i!=0 && i!=1){
         arrayofarray.push({readOnly: true, value: 'Employee_name'})
-        //console.log("third if")
+        console.log("third if")
       }
       else if (j==0 && i==1){
         arrayofarray.push({readOnly: true, value: 'Days'})
       }
       else if (j>daysInThisMonth()) {
       arrayofarray.push({ value:null})
-        //console.log("formula")
+        console.log("formula")
       }
     else 
     arrayofarray.push({dataEditor: SelectEditor,valueViewer: FillViewer});
 } 
    gridtemporary[i]=arrayofarray;
-   //console.log("arrayofrray",arrayofarray);
-   
+   console.log("arrayofrray",arrayofarray);
 }
 console.log("grid",gridtemporary);
 this.state = { grid:gridtemporary };
-// console.log("this.props.selectedTeam",props.selectedName)
-// console.log("this.props.Monthnumber",Monthnumber)
+  } 
+  
+  state= {
+  //showTable:false, //to show the table after clicking on the button
+  showButton:false, //to show the button after clicking on the team from the drop down
+   }
 
 
+render () {
 return (
 <Datasheet 
   data={this.state.grid} 
@@ -173,7 +148,7 @@ this.setState({grid})
   }
 } 
 
- // const RowRenderer = rowDropTarget(rowDragSource((props) => {
+// const RowRenderer = rowDropTarget(rowDragSource((props) => {
 //   const { isOver, children, connectDropTarget, connectDragPreview,connectDragSource } = props
 //   const className = isOver ? 'drop-target' : ''
 //   return connectDropTarget(connectDragPreview(

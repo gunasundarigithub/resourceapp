@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Table from './Components/Table';
 import Select from './Components/MaterialUI/Select'; 
 import SelectEditor from './Components/SelectEditor';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from './Axios/axios'
 
 
@@ -18,38 +19,42 @@ state= {
    }
 
 handleChange = (event,value) => {
-  console.log(event.target.value);
-  console.log(event)
-  console.log(value)
+  console.log("selectedTeam",event.target.value);
     this.setState({ selectedTeam: event.target.value,showButton: true });
   }
 
 
  componentDidMount(){
    axios.get('/getteam').then(res=>{
-     //this.setState({selectedTeam:res.data});
      console.log("connected server",res.data);
      this.setState({team_list:res.data})
-     
-   })
+      })
  } 
 
+ componentDidUpdate(prevProps,prevState){
+  console.log("cinside compoenent")
+  if(prevState.selectedTeam!==this.state.selectedTeam) {
+    console.log("prevstate",prevState,this.state)
+      // let temp=this.state;
+      this.setState({selectedTeam:this.state.selectedTeam})
+      // this.setState({showTable:false})
+   }
+}
 render(){
 
+  console.log("cominggggggggggggggggggg");
 // const team_list = [
 //  { team_name:'wmma', team_id: 1 },
 //  { team_name: 'Auto_Exp', team_id: 2 },
 //  { team_name: 'ECT', team_id: 3 },
 //  { team_name: 'EFT', team_id: 4 },
 // ];
-//const [showTable, setShowTable] = useState(false);
 
 return (
   
   <div className="App">
   <SearchAppBar/> 
-
-      <div style={{width:'950px' }}>
+   <div style={{width:'950px' }}>
       <div>
       <br/>
       <Select title="Enterprise Teams" change={this.handleChange} items={this.state.team_list} selectedName={this.state.selectedTeam}   />
@@ -59,9 +64,8 @@ return (
     </div>
     </div>
 {this.state.showTable ? 
- 
  <div style={{display:'inline-block',marginRight: '0em',marginTop: '5em',justify_content:'center', align_items:'center'}}>
- <Table></Table>
+ <Table selectedName={this.state.selectedTeam}></Table>
 <br/>
 <Button variant="contained"  color="secondary">Submit</Button>
        

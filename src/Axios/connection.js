@@ -64,7 +64,7 @@ console.log(req.query.team_id)
 console.log(req.query.month_number)
 
 const Shift_query = `SELECT * FROM Calender WHERE Team_id = '${req.query.team_id}' AND Month = '${req.query.month_number}' `;
-
+const Shift_query1 = `SELECT * FROM Calender WHERE Team_id = '${req.query.team_id}' AND Month = '7'`;
   connection.query(Shift_query).then(data => {
    // console.log(JSON.stringify(data));
     const result = JSON.stringify(data);
