@@ -26,6 +26,7 @@ export default class Table extends React.Component {
   state= {
     //showTable:false, //to show the table after clicking on the button
     showButton:false, //to show the button after clicking on the team from the drop down
+    employee_count:0,
     grid:[]
      }
 
@@ -38,6 +39,8 @@ componentDidMount(){
     }
   }).then(res=>{
     console.log("employee details",res.data)
+   this.state.employee_count=res.data.length
+   console.log("employee_count",this.state.employee_count)
   })
   } 
   
@@ -89,7 +92,7 @@ console.log("daysinmonth",daysInThisMonth());
  //To form the shift table 
  const gridtemporary = [];
  //console.log("need to give number of employee in teh loop ");
-for(let i=0;i<=6;i++){
+for(let i=0;i<=this.state.employee_count+1;i++){
        const arrayofarray=[];
 for(let j=0;j<=(daysInThisMonth()+6);j++)
   {
@@ -130,9 +133,9 @@ for(let j=0;j<=(daysInThisMonth()+6);j++)
            {arrayofarray.push({readOnly: true, value:"Total_Hours"})}    
              }     
 }
-    else if(j==0 && i!=0 && i!=1){
+    else if(j==0 && (i!=0 && i!=1)){
         arrayofarray.push({readOnly: true, value: 'Employee_name'})
-        //console.log("third if")
+        console.log("third if")
       }
       else if (j==0 && i==1){
         arrayofarray.push({readOnly: true, value: 'Days'})
