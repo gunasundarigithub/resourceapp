@@ -27,6 +27,7 @@ export default class Table extends React.Component {
     //showTable:false, //to show the table after clicking on the button
     showButton:false, //to show the button after clicking on the team from the drop down
     employee_count:0,
+    employee_name:[],
     grid:[]
      }
 
@@ -40,7 +41,8 @@ componentDidMount(){
   }).then(res=>{
     console.log("employee details",res.data)
    this.state.employee_count=res.data.length
-   console.log("employee_count",this.state.employee_count)
+   this.state.employee_name=res.data.Employee_name
+   console.log("employee_count",this.state.employee_count,this.state.employee_name)
   })
   } 
   
