@@ -40,9 +40,14 @@ componentDidMount(){
     }
   }).then(res=>{
     console.log("employee details",res.data)
-   this.state.employee_count=res.data.length
-   this.state.employee_name=res.data.Employee_name
-   console.log("employee_count",this.state.employee_count,this.state.employee_name)
+   this.setState({employee_count:res.data.length})
+   
+   res.data.forEach(Employee=> {
+     console.log("employeeedetails",Employee.Employee_name)
+    this.setState({employee_name:Employee.Employee_name})
+    
+   });
+   
   })
   } 
   
@@ -94,11 +99,14 @@ console.log("daysinmonth",daysInThisMonth());
  //To form the shift table 
  const gridtemporary = [];
  //console.log("need to give number of employee in teh loop ");
-for(let i=0;i<=this.state.employee_count+1;i++){
+ const Em_count=this.state.employee_count
+ console.log("Em_count",Em_count)
+for(let i=0;i<=Em_count+1;i++){
+ 
        const arrayofarray=[];
 for(let j=0;j<=(daysInThisMonth()+6);j++)
   {
-    console.log("arrayofrray after2 nd for loop",arrayofarray);
+    console.log("arrayofrray after2 nd for loop",arrayofarray,i,j);
     if (j==0 && i==0)
       {arrayofarray.push({readOnly: true, value:monthName})
       //console.log("first if")
@@ -136,7 +144,10 @@ for(let j=0;j<=(daysInThisMonth()+6);j++)
              }     
 }
     else if(j==0 && (i!=0 && i!=1)){
-        arrayofarray.push({readOnly: true, value: 'Employee_name'})
+      var Em_name=this.state.employee_name
+      //const em_name=Em_name[j-1]
+      console.log("employeenamearray",Em_name)
+        arrayofarray.push({readOnly: true, value: Em_name})
         console.log("third if")
       }
       else if (j==0 && i==1){
