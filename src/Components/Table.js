@@ -41,12 +41,13 @@ componentDidMount(){
   }).then(res=>{
     console.log("employee details",res.data)
    this.setState({employee_count:res.data.length})
-   
+   var e=[]
    res.data.forEach(Employee=> {
      console.log("employeeedetails",Employee.Employee_name)
-    this.setState({employee_name:Employee.Employee_name})
-    
-   });
+     e.push(Employee.Employee_name)
+     console.log("printing e array",e)
+    this.setState({employee_name:e}) 
+     });
    
   })
   } 
@@ -144,8 +145,9 @@ for(let j=0;j<=(daysInThisMonth()+6);j++)
              }     
 }
     else if(j==0 && (i!=0 && i!=1)){
-      var Em_name=this.state.employee_name
-      //const em_name=Em_name[j-1]
+      var Em_name=[]
+      Em_name=this.state.employee_name
+     //const em_name=Em_name[j-1]
       console.log("employeenamearray",Em_name)
         arrayofarray.push({readOnly: true, value: Em_name})
         console.log("third if")
