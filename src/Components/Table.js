@@ -31,6 +31,116 @@ export default class Table extends React.Component {
     grid:[]
      }
 
+
+     getTable(employee_list){
+      const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+      let  Monthnumber=(new Date().getMonth())//month number- 0 is jan // 0..11 instead of 1..12
+      console.log("monthnumber",Monthnumber);
+      let monthName = monthNames[Monthnumber];
+      let Year=(new Date().getFullYear())//current year
+      console.log("year",Year);
+      
+    
+    // to get the days in the days rows
+      var getDaysArray = function(year, monthIndex) {
+      //var monthIndex = month - 1; 
+      var names = [ 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat' ];
+      var date = new Date(year, monthIndex, 1);
+      var result = [];
+      while (date.getMonth() == monthIndex) {
+        result.push(names[date.getDay()]);
+        date.setDate(date.getDate() + 1);
+      }
+      //console.log("dayyyyyyyyyyy",result);
+      return result;
+    }
+    
+    //Calculating number of days in current  month
+    function daysInThisMonth() {
+      var now = new Date();
+      return new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+    }
+    console.log("daysinmonth",daysInThisMonth());
+    
+        //To form the shift table 
+         const gridtemporary = [];
+         //console.log("need to give number of employee in teh loop ");
+         const Em_count=this.state.employee_count
+         console.log("Em_count",Em_count)
+        for(let i=0;i<=Em_count+1;i++){
+         
+               const arrayofarray=[];
+        for(let j=0;j<=(daysInThisMonth()+6);j++)
+          {
+            console.log("arrayofrray after2 nd for loop",arrayofarray,i,j);
+            if (j==0 && i==0)
+              {arrayofarray.push({readOnly: true, value:monthName})
+              //console.log("first if")
+              }
+              else if((j!=0 && j<=(daysInThisMonth()) && i==1)){
+                var days=getDaysArray(Year,Monthnumber)[j-1]
+                console.log("monthdayssssss",days);
+                console.log("j oda value",j)
+              {arrayofarray.push({readOnly: true, value:days})
+              //console.log("second if",getDaysArray)
+              }
+              }
+            else if((j!=0 && j<=(daysInThisMonth())) && i==0)
+              {arrayofarray.push({readOnly: true, value:j})
+              //console.log("third if")
+              }
+              else if (i==0 && j>(daysInThisMonth())){
+                     if(j==daysInThisMonth()+1) {
+                   {arrayofarray.push({readOnly: true, value:"G"})}    
+                     }
+                    if(j==daysInThisMonth()+2) {
+                   {arrayofarray.push({readOnly: true, value:"M"})}    
+                     }    
+                     if(j==daysInThisMonth()+3) {
+                   {arrayofarray.push({readOnly: true, value:"L"})}    
+                     } 
+                     if(j==daysInThisMonth()+4) {
+                   {arrayofarray.push({readOnly: true, value:"N"})}    
+                     }
+                     if(j==daysInThisMonth()+5) {
+                   {arrayofarray.push({readOnly: true, value:"E"})}    
+                     }  
+                     if(j==daysInThisMonth()+6) {
+                   {arrayofarray.push({readOnly: true, value:"Total_Hours"})}    
+                     }     
+        }
+            else if(j==0 && (i!=0 && i!=1)){
+              //i-row,j-coloumn
+              console.log("i value and J value",i,j)
+              var Em_name=[]
+              console.log("Array value is ",employee_list)
+             let em_index=employee_list.length
+              Em_name=employee_list[i]
+              console.log("employeenamearray",Em_name)
+                arrayofarray.push({readOnly:true, value:Em_name})
+                //Em_name=[]
+                console.log("third if")
+              }
+              else if (j==0 && i==1){
+                arrayofarray.push({readOnly: true, value: 'Days'})
+              }
+              else if (j>daysInThisMonth()) {
+              arrayofarray.push({ value:null})
+                //console.log("formula")
+              }
+            else 
+            arrayofarray.push({dataEditor: SelectEditor,valueViewer: FillViewer});
+        } 
+           gridtemporary[i]=arrayofarray;
+           //console.log("arrayofrray",arrayofarray);
+           
+        }
+        console.log("grid",gridtemporary);
+        this.setState({ grid:gridtemporary });
+        // console.log("this.props.selectedTeam",props.selectedName)
+        // console.log("this.props.Monthnumber",Monthnumber)
+        }
+
 //To call the current month or respective month shift plan from MS access excel
 
 componentDidMount(){
@@ -46,12 +156,14 @@ componentDidMount(){
      console.log("employeeedetails",Employee.Employee_name)
      e.push(Employee.Employee_name)
      console.log("printing e array",e)
-    this.setState({employee_name:e}) 
+    //this.setState({employee_name:e})
      });
+    let e_new = [0,0,...e]
+    console.log("E new",e_new);
+     this.getTable(e_new) 
    
   })
   } 
-  
   componentDidUpdate(prevProps,prevState){
     console.log("cinside compoenent")
     if(prevProps!=this.props.selectedName && prevState!=this.state.grid) {
@@ -66,112 +178,9 @@ componentDidMount(){
     }
   }
 
- 
+
 render () {
-
-  const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  let  Monthnumber=(new Date().getMonth())//month number- 0 is jan // 0..11 instead of 1..12
-  console.log("monthnumber",Monthnumber);
-  let monthName = monthNames[Monthnumber];
-  let Year=(new Date().getFullYear())//current year
-  console.log("year",Year);
-
-// to get the days in the days rows
-  var getDaysArray = function(year, monthIndex) {
-  //var monthIndex = month - 1; 
-  var names = [ 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat' ];
-  var date = new Date(year, monthIndex, 1);
-  var result = [];
-  while (date.getMonth() == monthIndex) {
-    result.push(names[date.getDay()]);
-    date.setDate(date.getDate() + 1);
-  }
-  //console.log("dayyyyyyyyyyy",result);
-  return result;
-}
-
-//Calculating number of days in current  month
-function daysInThisMonth() {
-  var now = new Date();
-  return new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
-}
-console.log("daysinmonth",daysInThisMonth());
-
- //To form the shift table 
- const gridtemporary = [];
- //console.log("need to give number of employee in teh loop ");
- const Em_count=this.state.employee_count
- console.log("Em_count",Em_count)
-for(let i=0;i<=Em_count+1;i++){
- 
-       const arrayofarray=[];
-for(let j=0;j<=(daysInThisMonth()+6);j++)
-  {
-    console.log("arrayofrray after2 nd for loop",arrayofarray,i,j);
-    if (j==0 && i==0)
-      {arrayofarray.push({readOnly: true, value:monthName})
-      //console.log("first if")
-      }
-      else if((j!=0 && j<=(daysInThisMonth()) && i==1)){
-        var days=getDaysArray(Year,Monthnumber)[j-1]
-        console.log("monthdayssssss",days);
-        console.log("j oda value",j)
-      {arrayofarray.push({readOnly: true, value:days})
-      //console.log("second if",getDaysArray)
-      }
-      }
-    else if((j!=0 && j<=(daysInThisMonth())) && i==0)
-      {arrayofarray.push({readOnly: true, value:j})
-      //console.log("third if")
-      }
-      else if (i==0 && j>(daysInThisMonth())){
-             if(j==daysInThisMonth()+1) {
-           {arrayofarray.push({readOnly: true, value:"G"})}    
-             }
-            if(j==daysInThisMonth()+2) {
-           {arrayofarray.push({readOnly: true, value:"M"})}    
-             }    
-             if(j==daysInThisMonth()+3) {
-           {arrayofarray.push({readOnly: true, value:"L"})}    
-             } 
-             if(j==daysInThisMonth()+4) {
-           {arrayofarray.push({readOnly: true, value:"N"})}    
-             }
-             if(j==daysInThisMonth()+5) {
-           {arrayofarray.push({readOnly: true, value:"E"})}    
-             }  
-             if(j==daysInThisMonth()+6) {
-           {arrayofarray.push({readOnly: true, value:"Total_Hours"})}    
-             }     
-}
-    else if(j==0 && (i!=0 && i!=1)){
-      var Em_name=[]
-      Em_name=this.state.employee_name
-     //const em_name=Em_name[j-1]
-      console.log("employeenamearray",Em_name)
-        arrayofarray.push({readOnly: true, value: Em_name})
-        console.log("third if")
-      }
-      else if (j==0 && i==1){
-        arrayofarray.push({readOnly: true, value: 'Days'})
-      }
-      else if (j>daysInThisMonth()) {
-      arrayofarray.push({ value:null})
-        //console.log("formula")
-      }
-    else 
-    arrayofarray.push({dataEditor: SelectEditor,valueViewer: FillViewer});
-} 
-   gridtemporary[i]=arrayofarray;
-   //console.log("arrayofrray",arrayofarray);
-   
-}
-console.log("grid",gridtemporary);
-this.state = { grid:gridtemporary };
-// console.log("this.props.selectedTeam",props.selectedName)
-// console.log("this.props.Monthnumber",Monthnumber)
-
-
+  
 return (
 <Datasheet 
   data={this.state.grid} 
