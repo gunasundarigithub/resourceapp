@@ -7,7 +7,7 @@
     "node-adodb": "^5.0.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.5",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "express-handlebars": "^3.0.0",
     "util": "^0.12.1"
   },
